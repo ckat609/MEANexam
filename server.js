@@ -15,4 +15,4 @@ mongoose.connect('mongodb://localhost/restaurants', {
 
 require('./server/config/routes')(app);
 
-app.listen(8000, () => console.log("Listening on port 8000"));
+app.listen(4200, () => console.log("Listening on port 4200"));
