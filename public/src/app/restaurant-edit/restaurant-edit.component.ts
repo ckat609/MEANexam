@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { HttpService } from '../http.service';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -10,6 +10,12 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class RestaurantEditComponent implements OnInit {
   aRestaurant: any;
   dbErrors = [];
+  @Input() enableEdit;
+  @Input() aRestaurantId;
+  @Output() setEnableEdit = new EventEmitter();
+  @Output() resetRestaurants = new EventEmitter();
+
+
 
   constructor(
     private _httpService: HttpService,
@@ -18,12 +24,17 @@ export class RestaurantEditComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.aRestaurant = {};
+    if (this.aRestaurantId != null) {
+      console.log(this.aRestaurantId);
+      this.getRestaurantFromService(this.aRestaurantId);
+    } else {
+      this.aRestaurant = {};
 
-    let observable = this._route.params;
-    observable.subscribe(data => {
-      this.getRestaurantFromService(data['id']);
-    })
+      let observable = this._route.params;
+      observable.subscribe(data => {
+        this.getRestaurantFromService(data['id']);
+      })
+    }
   }
 
   getRestaurantFromService(id) {
@@ -48,8 +59,13 @@ export class RestaurantEditComponent implements OnInit {
         }
       } else {
         console.log("SKIP")
+        this.setEnableEdit.emit();
+        this.resetRestaurants.emit();
         this._router.navigate(['/']);
       }
     })
+  }
+  runSetEnableEdit() {
+    this.setEnableEdit.emit();
   }
 }

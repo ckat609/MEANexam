@@ -5,9 +5,10 @@
     <p class="card-text">{{aRestaurant.description}}</p>
   </div>
   <div class="form-group">
-    <button class="btn btn-success btn-fixed" (click)="showAddReview()">Review</button>
+    <button *ngIf="!enableEdit" class="btn btn-danger btn-fixed" routerLink="/">Back</button><button class="btn btn-success btn-fixed" (click)="showAddReview()">Review</button>
   </div>
 </div>
+
 
 <app-review-new *ngIf="addReview" [aReview]='aReview' [aRestaurant]="aRestaurant" (aRestaurantChange)="getRestaurantFromService(aRestaurant._id)" (addReviewChange)="showAddReview()"></app-review-new>
 
@@ -23,10 +24,8 @@
         </div>
         <div class="col col-sm-2">
           <div class="form-group">
-            <!-- <button class="btn btn-warning btn-fixed" routerLink="/edit/{{r._id}}">Edit</button> -->
           </div>
           <div class="form-group">
-            <!-- <button class="btn btn-danger btn-fixed" (click)="deleteBusinessFromService(r._id)">Delete</button> -->
           </div>
         </div>
       </div>

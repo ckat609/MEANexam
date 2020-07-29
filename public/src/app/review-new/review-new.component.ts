@@ -59,4 +59,8 @@ export class ReviewNewComponent implements OnInit {
     })
 
   }
+
+  cancelReview() {
+    this.addReviewChange.emit();
+  };
 }
