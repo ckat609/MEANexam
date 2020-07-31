@@ -1,19 +1,30 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <a class="navbar-brand" routerLink="/">LET'S EAT</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
+<div class="big-bg" [ngStyle]="{'background-image': 'url(' + image + ')'}">
+  <nav class="navbar navbar-expand-lg navbar-dark nav-bar-override">
+    <a class="navbar-brand">moodify</a>
+  </nav>
+  <!-- <app-header [location]="location" [image]="image"></app-header> -->
+  <div class="color-bg"></div>
 
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/new" routerLinkActive="active">New restaurant</a>
-      </li>
-    </ul>
+  <div class="container-fluid" sytle="z-index: 5;">
+    <div class="row">
+      <div class="col col-sm-2">
+        <app-location [location]="location" [avatar]="avatar"></app-location>
+      </div>
+      <div class="col col-sm-6">
+        <div class="row" class="track-list">
+          <div class="col">
+            <app-track [playlist]="playlist"></app-track>
+          </div>
+        </div>
+      </div>
+      <div class="col col-sm-4">
+        <div class="row" class="track-list">
+          <div class="col">
+            <app-chat-inbox></app-chat-inbox>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
-</nav>
-<div class="container">
-
-
   <router-outlet></router-outlet>
 </div>

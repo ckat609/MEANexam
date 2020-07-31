@@ -1,18 +1,24 @@
 const express = require('express');
-const mongoose = require('mongoose');
-const app = express();
+// const app = express();
+const app = require('express')();
+const http = require('http').createServer(app);
+const io = require('socket.io')(http);
 
-app.use(express.json());
-app.use(express.static(__dirname + "/public/dist/public"));
+
+app.use(express.static(__dirname + '/public/dist/public'));
 app.use(express.urlencoded({
     extended: true
 }));
-
-mongoose.connect('mongodb://localhost/restaurants', {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-});
+app.use(express.json());
 
 require('./server/config/routes')(app);
+
+io.on('connection', (socket) => {
+    console.log('a user connected');
+    socket.on('message', (msg) => {
+        console.log(msg);
+        socket.broadcast.emit('message-broadcast', msg);
+    });
+});
 
 app.listen(8000, () => console.log("Listening on port 8000"));
