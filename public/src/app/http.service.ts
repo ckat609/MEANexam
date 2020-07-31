@@ -1,37 +1,34 @@
 import { Injectable, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class HttpService implements OnInit {
 
+
   constructor(private _httpClient: HttpClient) { }
 
-  ngOnInit() { }
+  ngOnInit() {
 
-  getRestaurants() {
-    return this._httpClient.get('/api/restaurants');
   }
 
-  getRestaurant(id) {
-    return this._httpClient.get(`/api/restaurants/${id}`);
+  showWeather(lat, long) {
+    let myKey = '7fd033d2980db193dd2e17c1e85161b2';
+    //ALWAYS use https before the api openweathermap address
+    return this._httpClient.get(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&units=imperial&appid=${myKey}`);
   }
 
-  addRestaurant(aRestaurant) {
-    return this._httpClient.post('/api/restaurants', aRestaurant);
+  showImage(search) {
+    let myKey = '1325657-93e69d6db7347df4a3e30aa9f';
+    return this._httpClient.get(`https://pixabay.com/api/?key=${myKey}&q=${search}&image_type=photo`);
+    // return this._httpClient.get(`https://pixabay.com/api/?key=${myKey}&q=${search}+day&image_type=photo`, { headers?: HttpHeaders | { [header: "Set-Cookie"]: "HttpOnly;Secure;SameSite=Strict"} });
   }
 
-  updateRestaurant(aRestaurant) {
-    return this._httpClient.post(`/api/restaurants/${aRestaurant._id}`, aRestaurant);
+  getTracksFromService(playlist) {
+    // let playlist = "37i9dQZF1DWSf2RDTDayIx";
+    let myKey = "BQBwxJbM-S-w869pSfhK2iO4jfgtoQ9E1wzJwqX7x-Y4FOvmBKnnaPAz9Rp1AhfkoyzSOWxvjAgh6o7YSIiXiWBdf5z_rNqrhXXXda7wbQJKXtEodNv3jcB3yPfnlPDWuQBpVz0";
+    // var h = new Headers({"Accept": "application/json", "Content-Type": "application/json", "Authorization": "Bearer"});
+    return this._httpClient.get(`https://api.spotify.com/v1/playlists/${playlist}/tracks`, { headers: { "Accept": "application/json", "Content-Type": "application/json", "Authorization": `Bearer ${myKey}` } });
   }
-
-  deleteRestaurant(id) {
-    return this._httpClient.delete(`/api/restaurants/${id}`);
-  }
-
-  addReview(id, aReview) {
-    return this._httpClient.post(`/api/restaurants/${id}/reviews`, aReview);
-  }
-
 }

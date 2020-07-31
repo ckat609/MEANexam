@@ -1,2 +1,0 @@
-# MEANexam
-MEAN belt exam

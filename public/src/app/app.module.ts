@@ -1,31 +1,29 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HttpService } from './http.service';
-import { HttpClientModule } from '@angular/common/http';
+import { LocationComponent } from './location/location.component';
+
 import { FormsModule } from '@angular/forms';
-import { RestaurantNewComponent } from './restaurant-new/restaurant-new.component';
-import { RestaurantIndexComponent } from './restaurant-index/restaurant-index.component';
-import { RestaurantEditComponent } from './restaurant-edit/restaurant-edit.component';
-import { RestaurantShowComponent } from './restaurant-show/restaurant-show.component';
-import { ReviewNewComponent } from './review-new/review-new.component';
+import { HttpClientModule } from '@angular/common/http';
+import { HttpService } from './http.service';
+import { HeaderComponent } from './header/header.component';
+import { TrackComponent } from './track/track.component';
+import { ChatInboxComponent } from './chat-inbox/chat-inbox.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    RestaurantNewComponent,
-    RestaurantIndexComponent,
-    RestaurantEditComponent,
-    RestaurantShowComponent,
-    ReviewNewComponent,
+    LocationComponent,
+    HeaderComponent,
+    TrackComponent,
+    ChatInboxComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    FormsModule,
     HttpClientModule,
-    FormsModule
   ],
   providers: [HttpService],
   bootstrap: [AppComponent]
